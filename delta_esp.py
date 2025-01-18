@@ -108,17 +108,17 @@ DELTA_DATA = (
 DELTA_STRUCT = '>' + ''.join([item[1] for item in DELTA_DATA])
 
 def connect_mqtt():
-  global client_id, mqtt_server
-  client = MQTTClient(client_id, mqtt_server, user="USER", password="PASS") # Change USER and PASS to MQTT Broker details
-  client.connect()
-  print('Connected to %s MQTT broker' % (mqtt_server))
-  return client
+    global client_id, mqtt_server
+    client = MQTTClient(client_id, mqtt_server, user="USER", password="PASS") # Change USER and PASS to MQTT Broker details
+    client.connect()  
+    print('Connected to %s MQTT broker' % (mqtt_server))
+    return client
 
 def restart_and_reconnect():
-  print('Failed to connect to MQTT broker. Reconnecting...')
-  time.sleep(10)
-  machine.reset()
-  
+    print('Failed to connect to MQTT broker. Reconnecting...')
+    time.sleep(10)
+    machine.reset()
+
 ##Send cmd/subcmd (e.g. 0x60/0x01) and optional data to the RS485 bus
 def send(conn, req, cmd, subcmd, data=b'', addr=1):
     # Raise RTS to signal the start of transmission
@@ -179,15 +179,15 @@ def receive(conn):
             idx += 1
             continue
         yield {
-             "data": data,
-             "stx": stx,
-             "req": req,
-             "addr": addr,
-             "size": size,
-             "msg": msg,
-             "lsb": lsb,
-             "msb": msb,
-             "etx": etx,
+            "data": data,
+            "stx": stx,
+            "req": req,
+            "addr": addr,
+            "size": size,
+            "msg": msg,
+            "lsb": lsb,
+            "msb": msb,
+            "etx": etx,
         }
         idx += 4 + size
 
